@@ -2,7 +2,7 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg bg-body-light pt-4 pb-4">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/index"
+                <a class="navbar-brand" href="/"
                     ><img
                         src="~/assets/images/logo.png"
                         alt="logo"

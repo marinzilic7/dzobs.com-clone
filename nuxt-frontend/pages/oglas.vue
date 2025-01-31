@@ -21,58 +21,51 @@
         </div>
     </div>
 
-    <div class="container">
+    <Recenzije />
+
+    <!-- Tipovi oglasa -->
+
+    <div class="container mt-lg-5">
         <div class="row">
-            <div class="col-12 mt-5 d-flex justify-content-center">
-                <div
-                    class="items d-flex ps-5 pe-5 pt-3 pb-3 align-items-center rounded gap-3"
-                >
-                    <div>
-                        <img
-                            src="~/assets/images/logo.png"
-                            alt="slika"
-                            height="50px"
-                            width="50px"
-                        />
-                    </div>
-                    <div class="job-rece mt-3">
-                        <p class="fw-bold">
-                            "Za 3 dana smo dobili preko 40 prijava za Senior PHP
-                            poziciju.Prezadovoljni smo rezultatom. "
-                        </p>
-                        <span class="fw-bold">Iva, HR Manager @Bay42</span>
+            <div class="d-flex flex-column align-items-center mt-5">
+                <div class="col-12 col-lg-8">
+                    <h3>Odaberite tip oglasa</h3>
+                </div>
+                <div class="premium-oglas  rounded ps-3 pe-3 pt-4 pb-2 col-12 col-lg-8 mt-4">
+                    <div class="oglas-items-1">
+                        <h5>Premium oglas u boji</h5>
+                        <div class="d-flex justify-content-between">
+                            <p>
+                                Prvi u redu prikazivanja. <span class="fw-bold">3 x veća vidljivost</span> u
+                                odnosu na standardni oglas.
+                            </p>
+                            <p class="fw-bold">300 KM</p>
+                        </div>
+                        <p>Pogledaj primjer</p>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 mt-4 d-flex justify-content-center">
-                <div
-                    class="items-2 d-flex ps-5 pe-5 pt-3 pb-3 align-items-center rounded gap-3"
-                >
-                    <div>
-                        <img
-                            src="~/assets/images/logo.png"
-                            alt="slika"
-                            height="50px"
-                            width="50px"
-                        />
-                    </div>
-                    <div class="job-rece mt-3">
-                        <p class="fw-bold">
-                            "Tražili smo PM poziciju i Dzobs je dao daleko bolje
-                            rezultate u odnosu na LinkedIn. "
-                        </p>
-                        <span class="fw-bold">Peter, CTO @ Sparwk</span>
+                <div class="border ps-3 pe-3 pt-4 pb-2 col-12 col-lg-8 mt-4">
+                    <div class="oglas-items-2">
+                        <h5 class="text-muted">Premium oglas</h5>
+                        <div class="d-flex justify-content-between">
+                            <p>
+                                Prvi u redu prikazivanja. <span class="fw-bold">2 x veća vidljivost</span> u
+                                odnosu na standardni oglas.
+                            </p>
+                            <p class="fw-bold">200 KM</p>
+                        </div>
+                        <p>Pogledaj primjer</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </template>
 
 <script setup>
 import Navbar from "~/components/Navbar.vue";
+import Recenzije from "~/components/Recenzije.vue";
 </script>
 
 <style scoped>
@@ -85,6 +78,30 @@ import Navbar from "~/components/Navbar.vue";
     line-height: 10px;
 }
 
+.premium-oglas{
+    border:1px solid #0160fe;
+}
+
+.oglas-items-1{
+    line-height: 1;
+    color:#0160fe;
+}
+
+.oglas-items-1 h5{
+    font-weight: 700;
+}
+
+.oglas-items-2{
+    line-height: 1;
+    color:grey;
+}
+
+.oglas-items-2 h5{
+    font-weight: 700;
+}
+
+
+
 @media screen and (max-width: 900px) {
     .oglas-description {
         line-height: 1.6;
@@ -93,34 +110,28 @@ import Navbar from "~/components/Navbar.vue";
     .container-fluid {
         padding: 3rem;
     }
-}
 
-.items {
-    background-color: #f0fdf4;
-    border: 1px solid #bbf7d0;
-}
+    .oglas-items-1 h5{
+        font-size: 18px;
+    }
 
-.items-2 {
-    background-color: #eff6ff;
-    border: 1px solid #bfdbfe;
-}
-
-.job-rece p {
-    max-width: 60ch;
-    font-size: 18px;
-}
-
-.job-rece span {
-    font-size: 14px;
-    color: #9596a5;
-}
-
-@media screen and (max-width: 900px) {
-    .job-rece p {
+    .oglas-items-1 p:first-child{
         font-size: 14px;
+        width: 30ch;
+
     }
-    .job-rece span {
-        font-size: 12px;
+
+    .oglas-items-2 h5{
+        font-size: 18px;
     }
+
+    .oglas-items-2 p:first-child{
+        font-size: 14px;
+        width: 30ch;
+
+    }
+
+
 }
+
 </style>

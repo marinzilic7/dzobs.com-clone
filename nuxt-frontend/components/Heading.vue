@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid ">
+    <div class="container-fluid">
         <h2 class="text-center heading">
             Najveća baza IT poslova i firmi u
             <span class="line-break text-center"> Bosni i Hercegovini</span>
@@ -17,10 +17,9 @@
 </template>
 
 <style scoped>
-
-.container-fluid{
-    background-color: #F3F5FE;
-    padding:7rem;
+.container-fluid {
+    background-color: #f3f5fe;
+    padding: 7rem;
 }
 .heading {
     line-height: 3rem;
@@ -37,5 +36,26 @@
 }
 .line-break {
     display: block;
+}
+
+@media screen and (max-width: 900px) {
+    .container-fluid {
+        padding: 3rem;
+        height: 350px ;
+    }
+    .heading {
+        line-height: 2rem;
+        font-size: 22px;
+    }
+
+    .description {
+        line-height: 1.6;
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .line-break {
+        display: inline;
+    }
 }
 </style>
