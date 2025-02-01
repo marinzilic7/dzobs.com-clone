@@ -71,7 +71,10 @@
             <div class="d-flex flex-column align-items-center">
                 <div class="col-12 col-lg-8">
                     <h5 class="mt-4 mt-lg-1">Sadržaj oglasa</h5>
-                    <form class="col-12 mt-lg-5 mt-3">
+                    <form
+                        class="col-12 mt-lg-5 mt-3"
+                        @submit.prevent="dodajOglas()"
+                    >
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label"
                                 >Naziv pozicije</label
@@ -81,6 +84,7 @@
                                 class="form-control"
                                 id="exampleInputEmail1"
                                 aria-describedby="emailHelp"
+                                v-model="oglas.nazivPozicije"
                             />
                         </div>
                         <label for="flexCheckDefault" class="form-label mt-3"
@@ -92,12 +96,13 @@
                                     <input
                                         class="form-check-input"
                                         type="checkbox"
-                                        value=""
-                                        id="flexCheckDefault"
+                                        :value="item"
+                                        :id="'flexCheckDefault' + index"
+                                        v-model="oglas.iskustvo"
                                     />
                                     <label
                                         class="form-check-label"
-                                        for="flexCheckDefault"
+                                        :for="'flexCheckDefault' + index"
                                     >
                                         {{ item }}
                                     </label>
@@ -113,6 +118,7 @@
                                 class="form-control"
                                 id="exampleInputEmail2"
                                 aria-describedby="emailHelp"
+                                v-model="oglas.kompanija"
                             />
                         </div>
                         <div class="mb-3 mt-4">
@@ -124,6 +130,7 @@
                                 class="form-control"
                                 id="exampleInputEmail3"
                                 aria-describedby="emailHelp"
+                                v-model="oglas.lokacija"
                             />
                         </div>
                         <div class="mb-3 mt-4">
@@ -135,6 +142,7 @@
                                 id="floatingTextarea"
                                 rows="4"
                                 cols="50"
+                                v-model="oglas.opisPozicije"
                             ></textarea>
                         </div>
                         <div class="mb-3 mt-4">
@@ -146,6 +154,7 @@
                                 class="form-control"
                                 id="exampleInputEmail4"
                                 aria-describedby="emailHelp"
+                                v-model="oglas.linkZaPrijavu"
                             />
                         </div>
                         <h5 class="mt-4 mt-lg-5">Kontakt osoba</h5>
@@ -158,6 +167,7 @@
                                 class="form-control"
                                 id="exampleInputEmail6"
                                 aria-describedby="emailHelp"
+                                v-model="oglas.ime"
                             />
                         </div>
                         <div class="mb-3 mt-4">
@@ -169,10 +179,13 @@
                                 class="form-control"
                                 id="exampleInputEmail7"
                                 aria-describedby="emailHelp"
+                                v-model="oglas.email"
                             />
                         </div>
-                        <div class="add-oglas d-flex justify-content-center mt-3 mb-4">
-                            <button class="btn btn-primary p-3">
+                        <div
+                            class="add-oglas d-flex justify-content-center mt-3 mb-4"
+                        >
+                            <button type="submit" class="btn btn-primary p-3">
                                 Pošalji oglas
                             </button>
                         </div>
@@ -198,9 +211,70 @@
 </template>
 
 <script setup>
+import axios from "axios";
 import Navbar from "~/components/Navbar.vue";
 import Recenzije from "~/components/Recenzije.vue";
+import { resetOglasData } from "~/utils/deleteInput";
+
 const array = ["Junior", "Mid", "Senior"];
+</script>
+
+<script>
+import { useToast } from "vue-toastification";
+
+export default {
+    components: {
+        Navbar,
+        Recenzije,
+    },
+    data() {
+        return {
+            oglas: {
+                nazivPozicije: "",
+                iskustvo: [],
+                kompanija: "",
+                lokacija: "",
+                opisPozicije: "",
+                linkZaPrijavu: "",
+                ime: "",
+                email: "",
+            },
+        };
+    },
+    methods: {
+        async dodajOglas() {
+            const Data = {
+                naziv_pozicije: this.oglas.nazivPozicije,
+                iskustvo: this.oglas.iskustvo,
+                kompanija: this.oglas.kompanija,
+                lokacija: this.oglas.lokacija,
+                opis_pozicije: this.oglas.opisPozicije,
+                link: this.oglas.linkZaPrijavu,
+                ime: this.oglas.ime,
+                kontakt: this.oglas.email,
+            };
+
+            try {
+                const response = await axios.post(
+                    "http://localhost:8000/api/dodajOglas",
+                    Data
+                );
+                console.log(response.data);
+                useToast().success("Uspješno dodan oglas", {
+                    position: "top-right",
+                    duration: 3000,
+                });
+                resetOglasData(this.oglas);
+            } catch (error) {
+                useToast().error("Greška prilikom dodavanja oglasa", {
+                    position: "top-right",
+                    duration: 3000,
+                });
+                console.log(error);
+            }
+        },
+    },
+};
 </script>
 
 <style scoped>
@@ -267,16 +341,14 @@ const array = ["Junior", "Mid", "Senior"];
         width: 30ch;
     }
 
-    .warning{
+    .warning {
         font-size: 12px;
         line-height: normal;
     }
 
-    .add-oglas button{
-        font-size: 13px ;
+    .add-oglas button {
+        font-size: 15px;
         padding: 5px 10px !important ;
     }
-
-
 }
 </style>

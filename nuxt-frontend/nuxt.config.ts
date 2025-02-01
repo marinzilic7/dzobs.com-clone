@@ -38,6 +38,7 @@ export default defineNuxtConfig({
     ],
     plugins: [
         { src: '~/plugins/bootstrap.js', mode: 'client' },  // Uvoz JS u klijentskom načinu
+        { src: '~/plugins/toastification.js', mode: 'client' },
     ],
     vite: {
         server:{
@@ -49,5 +50,6 @@ export default defineNuxtConfig({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
             __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
         }
-    }
+    },
+
   })
