@@ -34,8 +34,11 @@ class JobController extends Controller
         }else{
             return response()->json(['status' => 'error', 'message' => 'Došlo je do greške prilikom dodavanja oglasa.']);
         }
+    }
 
-
-
+    public function dohvatiOglase()
+    {
+        $jobs = Job::all();
+        return response()->json($jobs);
     }
 }

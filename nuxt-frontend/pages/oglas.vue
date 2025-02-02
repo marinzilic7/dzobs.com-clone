@@ -215,12 +215,12 @@ import axios from "axios";
 import Navbar from "~/components/Navbar.vue";
 import Recenzije from "~/components/Recenzije.vue";
 import { resetOglasData } from "~/utils/deleteInput";
-
+import { successToast, errorToast } from "~/utils/toast";
 const array = ["Junior", "Mid", "Senior"];
 </script>
 
 <script>
-import { useToast } from "vue-toastification";
+
 
 export default {
     components: {
@@ -260,16 +260,10 @@ export default {
                     Data
                 );
                 console.log(response.data);
-                useToast().success("Uspješno dodan oglas", {
-                    position: "top-right",
-                    duration: 3000,
-                });
+                successToast("Oglas uspješno dodan");
                 resetOglasData(this.oglas);
             } catch (error) {
-                useToast().error("Greška prilikom dodavanja oglasa", {
-                    position: "top-right",
-                    duration: 3000,
-                });
+                errorToast("Greška prilikom dodavanja oglasa");
                 console.log(error);
             }
         },
