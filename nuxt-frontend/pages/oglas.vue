@@ -44,9 +44,24 @@
                             </p>
                             <p class="fw-bold">300 KM</p>
                         </div>
-                        <p>Pogledaj primjer</p>
+                        <p
+                            @click="showExample()"
+                            class="pogledaj-primjer text-decoration-underline"
+                        >
+                            Pogledaj primjer
+                        </p>
                     </div>
                 </div>
+                <div v-if="primjerTrue" class="mt-3 col-12 col-lg-8 ">
+                    <img
+
+                        src="~/assets/images/primjer.png"
+                        alt="primjer"
+                        srcset=""
+                        width="100%"
+                    />
+                </div>
+
                 <div class="border ps-3 pe-3 pt-4 pb-2 col-12 col-lg-8 mt-4">
                     <div class="oglas-items-2">
                         <h5 class="text-muted">Premium oglas</h5>
@@ -58,8 +73,22 @@
                             </p>
                             <p class="fw-bold">200 KM</p>
                         </div>
-                        <p>Pogledaj primjer</p>
+                        <p
+                            @click="showExamplePrimjer()"
+                            class="pogledaj-primjer text-decoration-underline"
+                        >
+                            Pogledaj primjer
+                        </p>
                     </div>
+                </div>
+                <div v-if="primjerTrueBelow" class="mt-3 col-12 col-lg-8 ">
+                    <img
+
+                        src="~/assets/images/primjer_2.png"
+                        alt="primjer"
+                        srcset=""
+                        width="100%"
+                    />
                 </div>
             </div>
         </div>
@@ -220,8 +249,6 @@ const array = ["Junior", "Mid", "Senior"];
 </script>
 
 <script>
-
-
 export default {
     components: {
         Navbar,
@@ -239,6 +266,8 @@ export default {
                 ime: "",
                 email: "",
             },
+            primjerTrue: false,
+            primjerTrueBelow: false,
         };
     },
     methods: {
@@ -266,6 +295,12 @@ export default {
                 errorToast("Greška prilikom dodavanja oglasa");
                 console.log(error);
             }
+        },
+        showExample() {
+            this.primjerTrue = !this.primjerTrue;
+        },
+        showExamplePrimjer() {
+            this.primjerTrueBelow = !this.primjerTrueBelow;
         },
     },
 };
@@ -306,6 +341,10 @@ export default {
 .warning {
     line-height: 10px;
     font-size: 14px;
+}
+
+.pogledaj-primjer {
+    cursor: pointer;
 }
 
 @media screen and (max-width: 900px) {

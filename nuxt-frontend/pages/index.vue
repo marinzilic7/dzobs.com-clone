@@ -5,6 +5,7 @@ import axios from "axios";
 import { errorToast } from "~/utils/toast";
 
 const oglasi = ref([]);
+const showSpinner = ref(true);
 
 const dohvatiOglase = async () => {
     try {
@@ -16,6 +17,8 @@ const dohvatiOglase = async () => {
     } catch (error) {
         console.log("Greška prilikom dohvaćanja oglasa");
         errorToast("Greška prilikom dohvaćanja oglasa");
+    } finally{
+        showSpinner.value = false;
     }
 };
 
@@ -25,75 +28,89 @@ onBeforeMount(() => {
 </script>
 
 <template>
-    <div>
-        <Navbar />
-    </div>
-    <div>
-        <Heading />
-    </div>
-    <div class="container d-flex justify-content-center">
-        <div
-            class="items col-lg-10 col-12 search-items d-flex align-items-center border justify-content-center p-4"
-        >
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Lokacija</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Iskustvo</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Ključna riječ, Npr. React</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-            <button class="btn btn-primary">Pretraži</button>
+    <div v-if="showSpinner" class="position-absolute top-50 start-50 z-3 ">
+        <div class="spinner-grow text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
         </div>
     </div>
+    <div v-else>
+        <div>
+            <Navbar />
+        </div>
+        <div>
+            <Heading />
+        </div>
+        <div class="container d-flex justify-content-center">
+            <div
+                class="items col-lg-10 col-12 search-items d-flex align-items-center border justify-content-center p-4"
+            >
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Lokacija</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Iskustvo</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Ključna riječ, Npr. React</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+                <button class="btn btn-primary">Pretraži</button>
+            </div>
+        </div>
 
-    <div
-        class="container d-flex flex-column gap-4 align-items-center justify-content-center"
-    >
+
         <div
-            v-for="oglas in oglasi"
-            :key="oglas.id"
-            class="row main-item gap-4 p-4 col-lg-10 col-12"
+            class="container d-flex flex-column gap-4 align-items-center justify-content-center"
         >
-            <div class="d-flex flex-wrap">
-                <div
-                    class="d-flex align-items-center gap-4 col-12 col-md-5 col-lg-7 col-sm-12"
-                >
-                    <img
-                        class="img-fluid"
-                        src="~/assets/images/logo.png"
-                        alt="logo"
-                        srcset=""
-                        height="50px"
-                        width="50px"
-                    />
-                    <div>
-                        <h5 class="naslov">Backend developer</h5>
-                        <p class="naslov text-muted">Wunder Mobility</p>
+            <div class="col-lg-10 col-12">
+                <h3 class="text-start">Oglasi</h3>
+            </div>
+            <div
+                v-for="oglas in oglasi"
+                :key="oglas.id"
+                class="row main-item gap-4 p-4 col-lg-10 col-12"
+            >
+
+                <div class="d-flex flex-wrap">
+                    <div
+                        class="d-flex align-items-center gap-4 col-12 col-md-5 col-lg-7 col-sm-12"
+                    >
+                        <img
+                            class="img-fluid"
+                            src="~/assets/images/logo.png"
+                            alt="logo"
+                            srcset=""
+                            height="50px"
+                            width="50px"
+                        />
+                        <div>
+                            <h5 class="naslov">Backend developer</h5>
+                            <p class="naslov text-muted">Wunder Mobility</p>
+                        </div>
                     </div>
-                </div>
-                <div class="oglas-items d-flex gap-5 col-12 col-md-7 col-lg-5">
-                    <div>
-                        <p id="first-child">Lokacija</p>
-                        <p id="second-child">Banja Luka</p>
-                    </div>
-                    <div>
-                        <p id="first-child">Iskustvo</p>
-                        <p id="second-child">Senior</p>
-                    </div>
-                    <div>
-                        <p id="first-child">Rok prijave</p>
-                        <p id="second-child">još 27 dana</p>
+                    <div
+                        class="oglas-items d-flex gap-5 col-12 col-md-7 col-lg-5"
+                    >
+                        <div>
+                            <p id="first-child">Lokacija</p>
+                            <p id="second-child">Banja Luka</p>
+                        </div>
+                        <div>
+                            <p id="first-child">Iskustvo</p>
+                            <p id="second-child">Senior</p>
+                        </div>
+                        <div>
+                            <p id="first-child">Rok prijave</p>
+                            <p id="second-child">još 27 dana</p>
+                        </div>
                     </div>
                 </div>
             </div>
