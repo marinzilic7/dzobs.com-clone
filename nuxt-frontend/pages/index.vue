@@ -17,10 +17,13 @@ const dohvatiOglase = async () => {
     } catch (error) {
         console.log("Greška prilikom dohvaćanja oglasa");
         errorToast("Greška prilikom dohvaćanja oglasa");
-    } finally{
+    } finally {
         showSpinner.value = false;
     }
 };
+
+
+
 
 onBeforeMount(() => {
     dohvatiOglase();
@@ -28,7 +31,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
-    <div v-if="showSpinner" class="position-absolute top-50 start-50 z-3 ">
+    <div v-if="showSpinner" class="position-absolute top-50 start-50 z-3">
         <div class="spinner-grow text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
@@ -66,7 +69,6 @@ onBeforeMount(() => {
             </div>
         </div>
 
-
         <div
             class="container d-flex flex-column gap-4 align-items-center justify-content-center"
         >
@@ -74,11 +76,11 @@ onBeforeMount(() => {
                 <h3 class="text-start">Oglasi</h3>
             </div>
             <div
+                data-aos="fade-right"
                 v-for="oglas in oglasi"
                 :key="oglas.id"
                 class="row main-item gap-4 p-4 col-lg-10 col-12"
             >
-
                 <div class="d-flex flex-wrap">
                     <div
                         class="d-flex align-items-center gap-4 col-12 col-md-5 col-lg-7 col-sm-12"
@@ -92,8 +94,8 @@ onBeforeMount(() => {
                             width="50px"
                         />
                         <div>
-                            <h5 class="naslov">Backend developer</h5>
-                            <p class="naslov text-muted">Wunder Mobility</p>
+                            <h5 class="naslov">{{ oglas.naziv_pozicije }}</h5>
+                            <p class="naslov text-muted">{{ oglas.kompanija }}</p>
                         </div>
                     </div>
                     <div
@@ -101,11 +103,11 @@ onBeforeMount(() => {
                     >
                         <div>
                             <p id="first-child">Lokacija</p>
-                            <p id="second-child">Banja Luka</p>
+                            <p id="second-child">{{ oglas.lokacija }}</p>
                         </div>
                         <div>
                             <p id="first-child">Iskustvo</p>
-                            <p id="second-child">Senior</p>
+                            <p id="second-child">{{ oglas.iskustvo }}</p>
                         </div>
                         <div>
                             <p id="first-child">Rok prijave</p>
@@ -116,6 +118,8 @@ onBeforeMount(() => {
             </div>
         </div>
     </div>
+
+ 
 </template>
 
 <style>

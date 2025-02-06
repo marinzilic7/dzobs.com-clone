@@ -302,6 +302,8 @@ export default {
         showExamplePrimjer() {
             this.primjerTrueBelow = !this.primjerTrueBelow;
         },
+
+
     },
 };
 </script>

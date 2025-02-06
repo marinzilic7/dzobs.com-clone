@@ -1,9 +1,48 @@
+<script setup>
+import { errorToast } from "~/utils/toast";
+import { successToast } from "~/utils/toast";
+import axios from "axios";
+
+const firstName = ref("");
+const lastName = ref("");
+const email = ref("");
+const password = ref("");
+
+
+const register = async () => {
+    try {
+        const Data = {
+            firstName: firstName.value,
+            lastName: lastName.value,
+            email: email.value,
+            password: password.value,
+        };
+
+        const response = await axios.post(
+            "http://localhost:8000/api/register",
+            Data
+        );
+
+        console.log(response.data.message);
+        successToast(response.data.message);
+    } catch (error) {
+        console.log(error);
+        errorToast("Greška prilikom registracije");
+    }
+};
+
+
+</script>
+
 <template>
     <div
         class="d-flex justify-content-center flex-column align-items-center vh-100"
     >
         <h3 class="text-center mb-3">Registracija</h3>
-        <form class="border p-5 rounded col-12 col-lg-4 shadow-lg">
+        <form
+            class="border p-5 rounded col-12 col-lg-4 shadow-lg"
+            @submit.prevent="register()"
+        >
             <div class="input-group mb-3">
                 <div class="form-floating">
                     <input
@@ -11,6 +50,7 @@
                         class="form-control"
                         id="floatingInputGroup1"
                         placeholder="Username"
+                        v-model="firstName"
                     />
                     <label for="floatingInputGroup1">Ime</label>
                 </div>
@@ -22,6 +62,7 @@
                         class="form-control"
                         id="floatingInputGroup2"
                         placeholder="Username"
+                        v-model="lastName"
                     />
                     <label for="floatingInputGroup1">Prezime</label>
                 </div>
@@ -34,6 +75,7 @@
                         id="floatingInputGroup3"
                         placeholder="Username"
                         autocomplete="off"
+                        v-model="email"
                     />
                     <label for="floatingInputGroup1">Email adresa</label>
                 </div>
@@ -46,6 +88,7 @@
                         id="floatingInputGroup4"
                         placeholder="Username"
                         autocomplete="off"
+                        v-model="password"
                     />
                     <label for="floatingInputGroup1">Lozinka </label>
                 </div>
