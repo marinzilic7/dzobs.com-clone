@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('ime');
             $table->string('kontakt');
             $table->string('vrsta_oglasa')->nullable();
+            $table->string('tip_oglasa');
             $table->timestamps();
         });
     }

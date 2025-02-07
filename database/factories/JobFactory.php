@@ -22,13 +22,13 @@ class JobFactory extends Factory
             'naziv_pozicije' => $this->faker->jobTitle(),
             'iskustvo' => $this->faker->randomElement(['Entry', 'Mid', 'Senior']),
             'kompanija' => $this->faker->company(),
-            'lokacija' => $this->faker->city(),
+            'lokacija' => $this->faker->randomElement([$this->faker->city(), 'Remote']),
             'opis_pozicije' => $this->faker->paragraph(),
             'link' => $this->faker->url(),
             'ime' => $this->faker->name(),
             'kontakt' => $this->faker->phoneNumber(),
             'vrsta_oglasa' => $this->faker->randomElement(['Full-time', 'Part-time', 'Freelance', null]),
-
+            'tip_oglasa' => $this->faker->randomElement(['Premium', 'Standard', 'Običan'])
         ];
     }
 }

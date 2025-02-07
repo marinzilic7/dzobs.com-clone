@@ -13,10 +13,11 @@ class JobController extends Controller
     public function dodajOglas(JobRequest $request)
     {
         $iskustvoString = implode(',', $request->iskustvo);
-
+        $tipOglasaString = implode(',', $request->tip_oglasa);
         $data = $request->validated();
 
         $data['iskustvo'] = $iskustvoString;
+        $data['tip_oglasa'] = $tipOglasaString;
         $job = Job::create($data);
 
         $job->save();
@@ -29,7 +30,9 @@ class JobController extends Controller
 
     public function dohvatiOglase()
     {
-        $jobs = Job::all();
-        return response()->json($jobs);
+        $job = Job::orderByRaw("FIELD(tip_oglasa, 'Premium', 'Standard', 'Običan')")
+                  ->get();
+
+            return response()->json($job);
     }
 }

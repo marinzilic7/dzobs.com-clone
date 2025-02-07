@@ -3,7 +3,7 @@ import Navbar from "~/components/Navbar.vue";
 import Heading from "~/components/Heading.vue";
 import axios from "axios";
 import { errorToast } from "~/utils/toast";
-import {useRouter} from 'vue-router';
+import { useRouter } from "vue-router";
 
 const router = useRouter();
 
@@ -30,14 +30,11 @@ const dohvatiOglase = async () => {
 const getUserData = async () => {
     showSpinner.value = true;
     try {
-        const response = await axios.get(
-            "http://localhost:8000/api/getUser",
-            {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-            }
-        );
+        const response = await axios.get("http://localhost:8000/api/getUser", {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        });
         user.value = response.data;
         console.log("Ovo je korisnik", user.value);
     } catch (error) {
@@ -46,23 +43,25 @@ const getUserData = async () => {
     } finally {
         showSpinner.value = false;
     }
-}
+};
 
 const logout = async () => {
-    try{
-        await axios.post("http://localhost:8000/api/logout", {}, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-        });
+    try {
+        await axios.post(
+            "http://localhost:8000/api/logout",
+            {},
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            }
+        );
         localStorage.removeItem("token");
-        router.push('/login');
-    }catch(error){
-
+        router.push("/login");
+    } catch (error) {
         errorToast("Greška prilikom odjave");
     }
-}
-
+};
 
 onBeforeMount(() => {
     dohvatiOglase();
@@ -77,8 +76,6 @@ onBeforeMount(() => {
         </div>
     </div>
     <div v-else>
-
-
         <div>
             <Navbar />
         </div>
@@ -123,8 +120,23 @@ onBeforeMount(() => {
                 v-for="oglas in oglasi"
                 :key="oglas.id"
                 class="row main-item gap-4 p-4 col-lg-10 col-12"
+                :class="{
+                    'premium-oglas': oglas.tip_oglasa === 'Premium',
+                    'standard-oglas': oglas.tip_oglasa === 'Standard',
+                    '': oglas.featured === 'Običan',
+
+                }"
             >
                 <div class="d-flex flex-wrap">
+                    <div
+                        v-if="oglas.tip_oglasa === 'Premium'"
+                        class="tip_oglasa"
+                    >
+                        <p>{{ oglas.tip_oglasa }}</p>
+                    </div>
+                    <div v-if="oglas.lokacija === 'Remote'" class="remote">
+                        <p>remote</p>
+                    </div>
                     <div
                         class="d-flex align-items-center gap-4 col-12 col-md-5 col-lg-7 col-sm-12"
                     >
@@ -138,7 +150,9 @@ onBeforeMount(() => {
                         />
                         <div>
                             <h5 class="naslov">{{ oglas.naziv_pozicije }}</h5>
-                            <p class="naslov text-muted">{{ oglas.kompanija }}</p>
+                            <p class="naslov text-muted">
+                                {{ oglas.kompanija }}
+                            </p>
                         </div>
                     </div>
                     <div
@@ -164,11 +178,9 @@ onBeforeMount(() => {
     <div class="d-flex justify-content-center">
         <button class="btn btn-danger mt-5" @click="logout()">Odjava</button>
     </div>
-
-
 </template>
 
-<style>
+<style scoped>
 select.form-select {
     margin: 1rem;
     border-radius: 20px;
@@ -207,6 +219,45 @@ select.form-select {
 #second-child {
     font-size: 16px;
     font-weight: 500;
+}
+
+.tip_oglasa {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 10px;
+}
+
+.tip_oglasa p {
+    background-color: #ebb304;
+    color: #fff;
+    padding: 5px;
+    border-top-right-radius: 20px 20px;
+}
+
+.premium-oglas {
+    background-color: #feefc1;
+}
+
+.standard-oglas {
+    background-color: #fffefa;
+    border: 1px solid #feefc1;
+}
+
+.remote{
+    position: absolute;
+    left: -10px;
+    top:-10px;
+    font-size:10px;
+}
+
+.remote p{
+    background-color: #333333;
+    opacity: 0.8;
+    color: #fff;
+    padding: 5px;
+    border-radius: 20px;
+
 }
 
 @media (max-width: 768px) {

@@ -138,6 +138,28 @@
                                 </div>
                             </div>
                         </div>
+                        <label for="flexCheckDefault" class="form-label mt-3"
+                            >Tip oglasa</label
+                        >
+                        <div class="d-flex gap-3">
+                            <div v-for="(item, index) in tip_oglasa" :key="index">
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        :value="item"
+                                        :id="'flexCheckDefault' + index"
+                                        v-model="oglas.tip_oglasa"
+                                    />
+                                    <label
+                                        class="form-check-label"
+                                        :for="'flexCheckDefault' + index"
+                                    >
+                                        {{ item }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="mb-3 mt-4">
                             <label for="exampleInputEmail1" class="form-label"
                                 >Kompanija</label
@@ -246,6 +268,7 @@ import Recenzije from "~/components/Recenzije.vue";
 import { resetOglasData } from "~/utils/deleteInput";
 import { successToast, errorToast } from "~/utils/toast";
 const array = ["Junior", "Mid", "Senior"];
+const tip_oglasa = ['Premium','Standard','bičan', ];
 </script>
 
 <script>
@@ -265,6 +288,7 @@ export default {
                 linkZaPrijavu: "",
                 ime: "",
                 email: "",
+                tip_oglasa: [],
             },
             primjerTrue: false,
             primjerTrueBelow: false,
@@ -281,6 +305,7 @@ export default {
                 link: this.oglas.linkZaPrijavu,
                 ime: this.oglas.ime,
                 kontakt: this.oglas.email,
+                tip_oglasa: this.oglas.tip_oglasa
             };
 
             try {

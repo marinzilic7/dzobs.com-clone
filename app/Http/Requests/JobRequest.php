@@ -30,7 +30,8 @@ class JobRequest extends FormRequest
             'link' => 'required',
             'ime' => 'required',
             'kontakt' => 'required',
-            'vrsta_oglasa' => ''
+            'vrsta_oglasa' => '',
+            'tip_oglasa' => ''
         ];
     }
 
@@ -43,7 +44,8 @@ class JobRequest extends FormRequest
             'opis_pozicije.required' => 'Opis pozicije je obavezan',
             'link.required' => 'Link je obavezan',
             'ime.required' => 'Ime je obavezno',
-            'kontakt.required' => 'Kontakt je obavezan'
+            'kontakt.required' => 'Kontakt je obavezan',
+            'tip_oglasa.required' => 'Tip oglasa je obavezan'
         ];
     }
 }

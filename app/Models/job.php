@@ -16,7 +16,8 @@ class job extends Model
         'link',
         'ime',
         'kontakt',
-        'vrsta_oglasa'
+        'vrsta_oglasa',
+        'tip_oglasa'
     ];
     use HasFactory;
 }
