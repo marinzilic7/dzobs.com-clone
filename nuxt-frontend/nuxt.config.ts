@@ -2,9 +2,7 @@
 
 
 export default defineNuxtConfig({
-
-
-
+    modules: ['@pinia/nuxt'],
     app:{
         head:{
             title: 'Oglasi',

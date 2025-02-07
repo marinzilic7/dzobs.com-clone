@@ -2,23 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+
 class UserController extends Controller
 {
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-       $data =  $request->validate([
-            'firstName' => 'required|string',
-            'lastName' => 'required|string',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string',
-        ]);
-
+        $data = $request->validated();
         $data['password'] = bcrypt($data['password']);
         $user = new User($data);
         $user->save();
@@ -36,12 +33,9 @@ class UserController extends Controller
         }
     }
 
-    public function login (Request $request){
+    public function login (LoginRequest $request){
 
-        $data = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|string'
-        ]);
+        $data = $request->validated();
 
         if(!Auth::attempt($data)){
             return response()->json([
@@ -64,7 +58,7 @@ class UserController extends Controller
         }
 }
 
-    
+
     public function getUserData(Request $request)
 {
     if ($request->user()) {
@@ -74,5 +68,19 @@ class UserController extends Controller
     }
 }
 
+public function logout(Request $request)
+{
+    // Provjera je li korisnik prijavljen
+    if ($request->user()) {
+        // Dohvati korisnika i obriši njegove tokene
+        $request->user()->tokens->each(function ($token) {
+            $token->delete();
+        });
+
+        return response()->json(['message' => 'Uspješno ste se odjavili'], 200);
+    }
+
+    return response()->json(['message' => 'Neprihvaćeni zahtjev'], 400);
+}
 
 }

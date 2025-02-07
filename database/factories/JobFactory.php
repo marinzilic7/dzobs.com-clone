@@ -28,7 +28,7 @@ class JobFactory extends Factory
             'ime' => $this->faker->name(),
             'kontakt' => $this->faker->phoneNumber(),
             'vrsta_oglasa' => $this->faker->randomElement(['Full-time', 'Part-time', 'Freelance', null]),
-            
+
         ];
     }
 }
