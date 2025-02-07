@@ -3,6 +3,8 @@
 
 export default defineNuxtConfig({
 
+
+
     app:{
         head:{
             title: 'Oglasi',
@@ -61,6 +63,5 @@ export default defineNuxtConfig({
             __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
         }
     },
-
 
   })

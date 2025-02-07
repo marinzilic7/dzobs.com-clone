@@ -3,11 +3,16 @@ import Navbar from "~/components/Navbar.vue";
 import Heading from "~/components/Heading.vue";
 import axios from "axios";
 import { errorToast } from "~/utils/toast";
+import {useRouter} from 'vue-router';
+
+const router = useRouter();
 
 const oglasi = ref([]);
 const showSpinner = ref(true);
+const user = ref();
 
 const dohvatiOglase = async () => {
+    showSpinner.value = true;
     try {
         const response = await axios.get(
             "http://localhost:8000/api/dohvatiOglase"
@@ -22,11 +27,46 @@ const dohvatiOglase = async () => {
     }
 };
 
+const getUserData = async () => {
+    showSpinner.value = true;
+    try {
+        const response = await axios.get(
+            "http://localhost:8000/api/getUser",
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            }
+        );
+        user.value = response.data;
+        console.log("Ovo je korisnik", user.value);
+    } catch (error) {
+        errorToast("Greška prilikom dohvaćanja korisnika");
+        console.log("Greška prilikom dohvaćanja korisnika");
+    } finally {
+        showSpinner.value = false;
+    }
+}
 
+const logout = async () => {
+    try{
+        await axios.post("http://localhost:8000/api/logout", {}, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        });
+        localStorage.removeItem("token");
+        router.push('/login');
+    }catch(error){
+
+        errorToast("Greška prilikom odjave");
+    }
+}
 
 
 onBeforeMount(() => {
     dohvatiOglase();
+    getUserData();
 });
 </script>
 
@@ -37,12 +77,15 @@ onBeforeMount(() => {
         </div>
     </div>
     <div v-else>
+
+
         <div>
             <Navbar />
         </div>
         <div>
             <Heading />
         </div>
+
         <div class="container d-flex justify-content-center">
             <div
                 class="items col-lg-10 col-12 search-items d-flex align-items-center border justify-content-center p-4"
@@ -118,8 +161,11 @@ onBeforeMount(() => {
             </div>
         </div>
     </div>
+    <div class="d-flex justify-content-center">
+        <button class="btn btn-danger mt-5" @click="logout()">Odjava</button>
+    </div>
 
- 
+
 </template>
 
 <style>
