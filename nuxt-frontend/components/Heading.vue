@@ -40,7 +40,7 @@
 
 @media screen and (max-width: 900px) {
     .container-fluid {
-        padding: 3rem;
+        padding: 2rem;
         height: 350px ;
     }
     .heading {

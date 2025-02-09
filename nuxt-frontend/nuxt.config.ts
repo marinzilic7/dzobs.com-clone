@@ -43,7 +43,8 @@ export default defineNuxtConfig({
     css:[
         'bootstrap/dist/css/bootstrap.min.css',
         '~/assets/main.css',
-        'aos/dist/aos.css'
+        'aos/dist/aos.css',
+        'bootstrap-icons/font/bootstrap-icons.css'
     ],
     plugins: [
         { src: '~/plugins/bootstrap.js', mode: 'client' },  // Uvoz JS u klijentskom načinu

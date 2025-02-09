@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->post('/logout', [UserController::class, 'logo
 // Oglasi
 Route::post('/dodajOglas', [JobController::class, 'dodajOglas']);
 Route::get('/dohvatiOglase', [JobController::class, 'dohvatiOglase']);
-
+Route::get('/oglas/{id}', [JobController::class, 'singleOglas']);
 
 // Korisnik
 Route::post('/register', [UserController::class,'register']);

@@ -115,17 +115,20 @@ onBeforeMount(() => {
             <div class="col-lg-10 col-12">
                 <h3 class="text-start">Oglasi</h3>
             </div>
-            <div
+
+            <NuxtLink
                 data-aos="fade-right"
                 v-for="oglas in oglasi"
                 :key="oglas.id"
-                class="row main-item gap-4 p-4 col-lg-10 col-12"
+                class="row main-item gap-4 p-4 col-lg-10 col-12 text-decoration-none text-dark"
                 :class="{
                     'premium-oglas': oglas.tip_oglasa === 'Premium',
                     'standard-oglas': oglas.tip_oglasa === 'Standard',
                     '': oglas.featured === 'Običan',
 
                 }"
+
+                :to="`/oglasi/${oglas.id}`"
             >
                 <div class="d-flex flex-wrap">
                     <div
@@ -172,7 +175,8 @@ onBeforeMount(() => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </NuxtLink>
+
         </div>
     </div>
     <div class="d-flex justify-content-center">

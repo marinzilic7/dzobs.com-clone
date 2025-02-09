@@ -35,4 +35,14 @@ class JobController extends Controller
 
             return response()->json($job);
     }
+
+    public function singleOglas($id){
+        $job = Job::find($id);
+        if($job){
+            return response()->json($job);
+        }else{
+            return response()->json(['status' => 'error', 'message' => 'Oglas nije pronađen.']);
+        }
+
+    }
 }

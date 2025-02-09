@@ -2,13 +2,14 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg bg-body-light pt-4 pb-4">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/"
-                    ><img
+                <NuxtLink class="navbar-brand" to="/">
+                    <img
                         src="~/assets/images/logo.png"
                         alt="logo"
                         height="50"
                         width="50"
-                /></a>
+                    />
+                </NuxtLink>
 
                 <button
                     class="navbar-toggler"
