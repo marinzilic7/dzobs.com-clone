@@ -13,21 +13,21 @@ const showSpinner = ref(true);
 const user = ref();
 const company = companies;
 
- const dohvatiOglase = async () => {
-     showSpinner.value = true;
-     try {
-         const response = await axios.get(
-             "http://localhost:8000/api/dohvatiOglase"
-         );
-         console.log(response.data);
-         oglasi.value = response.data;
-     } catch (error) {
-         console.log("Greška prilikom dohvaćanja oglasa");
-         errorToast("Greška prilikom dohvaćanja oglasa");
-     } finally {
-         showSpinner.value = false;
-     }
- };
+const dohvatiOglase = async () => {
+    showSpinner.value = true;
+    try {
+        const response = await axios.get(
+            "http://localhost:8000/api/dohvatiOglase"
+        );
+        console.log(response.data);
+        oglasi.value = response.data;
+    } catch (error) {
+        console.log("Greška prilikom dohvaćanja oglasa");
+        errorToast("Greška prilikom dohvaćanja oglasa");
+    } finally {
+        showSpinner.value = false;
+    }
+};
 
 const getUserData = async () => {
     showSpinner.value = true;
@@ -178,17 +178,14 @@ onBeforeMount(() => {
             </NuxtLink>
         </div>
         <Company />
+        <Contact />
     </div>
     <!-- <div class="d-flex justify-content-center">
         <button class="btn btn-danger mt-5" @click="logout()">Odjava</button>
     </div> -->
 </template>
 
-
-
 <style scoped>
-
-
 select.form-select {
     margin: 1rem;
     border-radius: 20px;
@@ -235,8 +232,6 @@ select.form-select {
     top: 0;
     font-size: 10px;
 }
-
-
 
 .tip_oglasa p {
     background-color: #ebb304;
@@ -308,9 +303,5 @@ select.form-select {
         padding-left: 20px;
         padding-right: 20px;
     }
-
-
 }
-
-
 </style>
