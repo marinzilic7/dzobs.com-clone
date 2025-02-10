@@ -1,31 +1,33 @@
 <script setup>
 import Navbar from "~/components/Navbar.vue";
 import Heading from "~/components/Heading.vue";
+import Company from "~/components/Company.vue";
 import axios from "axios";
 import { errorToast } from "~/utils/toast";
 import { useRouter } from "vue-router";
+import companies from "~/companies/companies.json";
 
 const router = useRouter();
-
 const oglasi = ref([]);
 const showSpinner = ref(true);
 const user = ref();
+const company = companies;
 
-const dohvatiOglase = async () => {
-    showSpinner.value = true;
-    try {
-        const response = await axios.get(
-            "http://localhost:8000/api/dohvatiOglase"
-        );
-        console.log(response.data);
-        oglasi.value = response.data;
-    } catch (error) {
-        console.log("Greška prilikom dohvaćanja oglasa");
-        errorToast("Greška prilikom dohvaćanja oglasa");
-    } finally {
-        showSpinner.value = false;
-    }
-};
+ const dohvatiOglase = async () => {
+     showSpinner.value = true;
+     try {
+         const response = await axios.get(
+             "http://localhost:8000/api/dohvatiOglase"
+         );
+         console.log(response.data);
+         oglasi.value = response.data;
+     } catch (error) {
+         console.log("Greška prilikom dohvaćanja oglasa");
+         errorToast("Greška prilikom dohvaćanja oglasa");
+     } finally {
+         showSpinner.value = false;
+     }
+ };
 
 const getUserData = async () => {
     showSpinner.value = true;
@@ -125,9 +127,7 @@ onBeforeMount(() => {
                     'premium-oglas': oglas.tip_oglasa === 'Premium',
                     'standard-oglas': oglas.tip_oglasa === 'Standard',
                     '': oglas.featured === 'Običan',
-
                 }"
-
                 :to="`/oglasi/${oglas.id}`"
             >
                 <div class="d-flex flex-wrap">
@@ -176,15 +176,19 @@ onBeforeMount(() => {
                     </div>
                 </div>
             </NuxtLink>
-
         </div>
+        <Company />
     </div>
-    <div class="d-flex justify-content-center">
+    <!-- <div class="d-flex justify-content-center">
         <button class="btn btn-danger mt-5" @click="logout()">Odjava</button>
-    </div>
+    </div> -->
 </template>
 
+
+
 <style scoped>
+
+
 select.form-select {
     margin: 1rem;
     border-radius: 20px;
@@ -232,6 +236,8 @@ select.form-select {
     font-size: 10px;
 }
 
+
+
 .tip_oglasa p {
     background-color: #ebb304;
     color: #fff;
@@ -245,24 +251,25 @@ select.form-select {
 
 .standard-oglas {
     background-color: #fffefa;
-    border: 1px solid #feefc1;
+    border: 1px solid #feefc1 !important;
 }
 
-.remote{
+.remote {
     position: absolute;
     left: -10px;
-    top:-10px;
-    font-size:10px;
+    top: -10px;
+    font-size: 10px;
 }
 
-.remote p{
+.remote p {
     background-color: #333333;
     opacity: 0.8;
     color: #fff;
     padding: 5px;
     border-radius: 20px;
-
 }
+
+
 
 @media (max-width: 768px) {
     .search-items {
@@ -295,5 +302,15 @@ select.form-select {
         width: 30px;
         height: 30px;
     }
+
+    .company-list {
+        height: auto;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+
 }
+
+
 </style>

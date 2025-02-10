@@ -1,0 +1,111 @@
+[
+    {
+      "id": 1,
+      "companyName": "Tech Solutions",
+      "location": "Zagreb, Croatia",
+      "hasOpenPosition": true,
+      "description": "Tech Solutions is a leading IT company specializing in software development and IT consulting.",
+      "premium" : true
+    },
+    {
+      "id": 2,
+      "companyName": "Creative Agency",
+      "location": "Split, Croatia",
+      "hasOpenPosition": false,
+      "description": "A dynamic creative agency providing marketing, branding, and design services to clients worldwide.",
+      "premium" : true
+    },
+    {
+      "id": 3,
+      "companyName": "Green Energy",
+      "location": "Rijeka, Croatia",
+      "hasOpenPosition": true,
+      "description": "A green energy company focusing on sustainable solutions and innovative technology for a better future.",
+      "premium" : true
+    },
+    {
+      "id": 4,
+      "companyName": "HealthCare Innovations",
+      "location": "Osijek, Croatia",
+      "hasOpenPosition": false,
+      "description": "HealthCare Innovations is dedicated to advancing healthcare through cutting-edge technologies and solutions.",
+      "premium" : true
+    },
+    {
+      "id": 5,
+      "companyName": "FutureTech",
+      "location": "Zadar, Croatia",
+      "hasOpenPosition": true,
+      "description": "A tech startup specializing in artificial intelligence and machine learning solutions for businesses."
+    },
+    {
+      "id": 6,
+      "companyName": "Smart Logistics",
+      "location": "Dubrovnik, Croatia",
+      "hasOpenPosition": true,
+      "description": "A logistics company focused on optimizing supply chains through technology and smart systems."
+    },
+    {
+      "id": 7,
+      "companyName": "Digital Agency",
+      "location": "Zagreb, Croatia",
+      "hasOpenPosition": false,
+      "description": "A full-service digital marketing agency providing strategies for online growth and brand building."
+    },
+    {
+      "id": 8,
+      "companyName": "Creative Minds",
+      "location": "Split, Croatia",
+      "hasOpenPosition": true,
+      "description": "A creative agency specializing in innovative design, web development, and branding strategies."
+    },
+    {
+      "id": 9,
+      "companyName": "NextGen Solutions",
+      "location": "Rijeka, Croatia",
+      "hasOpenPosition": false,
+      "description": "A software solutions company delivering scalable enterprise solutions to clients across industries."
+    },
+    {
+      "id": 10,
+      "companyName": "Tech Experts",
+      "location": "Osijek, Croatia",
+      "hasOpenPosition": true,
+      "description": "A consulting firm offering expert advice in software development and IT infrastructure management."
+    },
+    {
+      "id": 11,
+      "companyName": "Urban Mobility",
+      "location": "Zadar, Croatia",
+      "hasOpenPosition": false,
+      "description": "A company focused on developing smart urban mobility solutions for cities and municipalities."
+    },
+    {
+      "id": 12,
+      "companyName": "Global Reach",
+      "location": "Dubrovnik, Croatia",
+      "hasOpenPosition": true,
+      "description": "A global marketing agency helping businesses expand internationally through innovative digital strategies."
+    },
+    {
+      "id": 13,
+      "companyName": "Ecomerce Hub",
+      "location": "Zagreb, Croatia",
+      "hasOpenPosition": false,
+      "description": "An e-commerce platform providing solutions for online store owners and digital entrepreneurs."
+    },
+    {
+      "id": 14,
+      "companyName": "Innovative Solutions",
+      "location": "Split, Croatia",
+      "hasOpenPosition": true,
+      "description": "A company focused on delivering innovative software solutions to solve complex business challenges."
+    },
+    {
+      "id": 15,
+      "companyName": "Tech Innovations",
+      "location": "Rijeka, Croatia",
+      "hasOpenPosition": true,
+      "description": "A technology company specializing in software development, cybersecurity, and digital transformations."
+    }
+  ]
